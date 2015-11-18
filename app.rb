@@ -15,9 +15,6 @@ configure do
   }
 end
 
-set :bind, '0.0.0.0'
-set :port, '5007'
-
 namespace '/fdic' do
   get '/badge' do
     if File.read('fdic_schema_valid.dat').to_bool
