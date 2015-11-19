@@ -7,3 +7,4 @@ gem "sinatra-contrib"
 gem "fdic"
 gem "ncua"
 gem "rake"
+gem 'redis', '~>3.2'

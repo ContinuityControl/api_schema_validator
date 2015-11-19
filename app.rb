@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/namespace'
+require './lib/redis_connector.rb'
 
 class String
   def to_bool
@@ -17,7 +18,7 @@ end
 
 namespace '/fdic' do
   get '/badge' do
-    if File.read('fdic_schema_valid.dat').to_bool
+    if fdic_valid?
       send_file 'fdic_safe.svg'
     else
       send_file 'fdic_errors.svg'
@@ -26,7 +27,7 @@ namespace '/fdic' do
 
   get '/status' do
     content_type :json
-    if File.read('fdic_schema_valid.dat').to_bool
+    if fdic_valid?
       { status: true }.to_json
     else
       { status: false }.to_json
@@ -36,7 +37,7 @@ end
 
 namespace '/ncua' do
   get '/badge' do
-    if File.read('ncua_schema_valid.dat').to_bool
+    if ncua_valid?
       send_file 'ncua_safe.svg'
     else
       send_file 'ncua_errors.svg'
@@ -45,10 +46,18 @@ namespace '/ncua' do
 
   get '/status' do
     content_type :json
-    if File.read('ncua_schema_valid.dat').to_bool
+    if ncua_valid?
       { status: true }.to_json
     else
       { status: false }.to_json
     end
   end
+end
+
+def fdic_valid?
+  RedisConnector.get('fdic_status').to_bool
+end
+
+def ncua_valid?
+  RedisConnector.get('ncua_status').to_bool
 end

@@ -1,20 +1,16 @@
 require 'ncua'
+require './lib/redis_connector.rb'
 class NCUASchemaValidator
   def self.check_fdic
     begin
-    if ::NCUA.validate_schema!
-      File.open("ncua_schema_valid.dat", "w") do |file|
-        file << true
+      if ::NCUA.validate_schema!
+        RedisConnector.set('ncua_status', 'true')
       end
-    end
     rescue StandardError => e
-      File.open("ncua_schema_valid.dat", "w") do |file|
-        file << false
-      end
+      RedisConnector.set('ncua_status', 'false')
 
-      File.open("errors.log", "a") do |file|
-        file.puts "NCUA: #{DateTime.now.iso8601} -- #{e}"
-      end
+     #Log the error to STDERR
+      STDERR.puts "NCUA: #{DateTime.now.iso8601} -- #{e}"
     end
   end
 end
