@@ -4,8 +4,8 @@ require './lib/redis_connector.rb'
 
 class String
   def to_bool
-    return true if self == true || self == "true"
-    return false if self == false || self == "false"
+    return true if self == "true"
+    return false if self == "false"
   end
 end
 
@@ -27,11 +27,7 @@ namespace '/fdic' do
 
   get '/status' do
     content_type :json
-    if fdic_valid?
-      { status: true }.to_json
-    else
-      { status: false }.to_json
-    end
+    { schema_good: fdic_valid? }.to_json
   end
 end
 
@@ -46,11 +42,7 @@ namespace '/ncua' do
 
   get '/status' do
     content_type :json
-    if ncua_valid?
-      { status: true }.to_json
-    else
-      { status: false }.to_json
-    end
+    { schema_good: ncua_valid? }.to_json
   end
 end
 
