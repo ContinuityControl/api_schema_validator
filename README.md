@@ -15,9 +15,7 @@ Here are the current statuses of the gems:
 ## Local setup
 
 
-1) install redis:
-  - on OS X:
-  `brew install redis`
+1) install redis - use your favorite package manager or [this link.](http://redis.io/download)
 2) run `redis-server`
 3) run `bundle`
 4) run `REDIS_URL=redis://127.0.0.1:<your-redis-port> rake test_fdic test_ncua`
