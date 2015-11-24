@@ -13,7 +13,7 @@ namespace :mail do
       message += "NCUA out of date, upgrade it\n"
     end
     if !message.empty?
-      Mailer.send("engineering+fdic_status_notification@continuity.net",
+      Mailer.send("engineering+fdic_ncua_gems_need_bundling@continuity.net",
                   "Gems on api_schema_validator are out of date",
                   message)
     end
