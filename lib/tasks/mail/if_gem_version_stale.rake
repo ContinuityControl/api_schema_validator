@@ -5,14 +5,14 @@ namespace :mail do
   task :if_gem_version_stale do
     message = ""
     puts "checking the installed fdic version to see if it's latest"
-    if GemVersionValidator.fdic_latest?
+    unless GemVersionValidator.fdic_latest?
       message += "FDIC out of date, upgrade it\n"
     end
     puts "checking the installed ncua version to see if it's latest"
-    if GemVersionValidator.ncua_latest?
+    unless GemVersionValidator.ncua_latest?
       message += "NCUA out of date, upgrade it\n"
     end
-    if !message.empty?
+    unless message.empty?
       Mailer.send("engineering+fdic_ncua_gems_need_bundling@continuity.net",
                   "Gems on api_schema_validator are out of date",
                   message)
