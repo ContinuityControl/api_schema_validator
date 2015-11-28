@@ -2,7 +2,7 @@ require './lib/redis_connector.rb'
 require './lib/mailer.rb'
 namespace :mail do
   desc "test the current cached status, and email if it's bad"
-  task :if_schema_invalid do
+  task :if_schema_invalid, [:to_email_address] do |t, args|
     puts "testing the cached FDIC status"
     if !RedisConnector.get('fdic_status').to_bool
       message =
@@ -11,7 +11,7 @@ The api_schema_validator has tested the fdic gem's schema, and it has been found
 
 Please check this manually with the gem, and check the heroku logs as well.
       mail
-      Mailer.send("engineering+fdic_status_notification@continuity.net",
+      Mailer.send(args[:to_email_address],
                   "FDIC API STATUS UNSAFE",
                   message)
     end
@@ -24,7 +24,7 @@ The api_schema_validator has tested the ncua gem's schema, and it has been found
 
 Please check this manually with the gem, and check the heroku logs as well.
       mail
-      Mailer.send("engineering+ncua_status_notification@continuity.net",
+      Mailer.send(args[:to_email_address],
                   "NCUA API STATUS UNSAFE",
                   message)
     end
