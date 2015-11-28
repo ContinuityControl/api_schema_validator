@@ -3,6 +3,6 @@ namespace :validate do
   desc "test the NCUA's api"
   task :ncua_schema do
     puts "testing the NCUA schema"
-    NCUASchemaValidator.check_fdic
+    NCUASchemaValidator.check_schema
   end
 end

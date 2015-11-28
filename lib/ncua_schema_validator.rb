@@ -1,7 +1,7 @@
 require 'ncua'
 require './lib/redis_connector.rb'
 class NCUASchemaValidator
-  def self.check_fdic
+  def self.check_schema
     begin
       if ::NCUA.validate_schema!
         RedisConnector.set('ncua_status', 'true')

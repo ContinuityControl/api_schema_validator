@@ -3,6 +3,6 @@ namespace :validate do
   desc "test the FDIC's api"
   task :fdic_schema do
     puts "testing the FDIC schema"
-    FDICSchemaValidator.check_fdic
+    FDICSchemaValidator.check_schema
   end
 end

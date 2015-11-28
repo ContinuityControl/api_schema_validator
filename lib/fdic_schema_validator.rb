@@ -1,7 +1,7 @@
 require 'fdic'
 require './lib/redis_connector.rb'
 class FDICSchemaValidator
-  def self.check_fdic
+  def self.check_schema
     begin
     if ::FDIC::BankFind.validate_schema!
       RedisConnector.set('fdic_status', 'true')
