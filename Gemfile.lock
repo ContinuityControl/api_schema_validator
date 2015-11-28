@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.3.8)
     backports (3.6.7)
+    byebug (8.2.1)
     diff-lcs (1.2.5)
     fdic (0.9.0)
       httparty (~> 0.13)
@@ -63,6 +64,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   fdic
   ncua
   pony (~> 1.0)
