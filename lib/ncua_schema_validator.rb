@@ -10,7 +10,7 @@ class NCUASchemaValidator
       RedisConnector.set('ncua_status', 'false')
 
      #Log the error to STDERR
-      STDERR.puts "NCUA: #{DateTime.now.iso8601} -- #{e}"
+      $stderr.puts "NCUA: #{DateTime.now.iso8601} -- #{e}"
     end
   end
 end

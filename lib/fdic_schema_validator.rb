@@ -10,7 +10,7 @@ class FDICSchemaValidator
       RedisConnector.set('fdic_status', 'false')
 
      #Log the error to STDERR
-      STDERR.puts "FDIC: #{DateTime.now.iso8601} -- #{e}"
+      $stderr.puts "FDIC: #{DateTime.now.iso8601} -- #{e}"
     end
   end
 end
