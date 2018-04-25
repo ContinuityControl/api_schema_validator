@@ -1,6 +1,5 @@
 # A sample Gemfile
 source "https://rubygems.org"
-ruby "2.3.0"
 
 # gem "rails"
 gem "sinatra"
@@ -12,6 +11,7 @@ gem "pony", "~>1.0"
 gem 'redis', '~>3.2'
 
 group :test do
+  gem 'rack-test'
   gem 'rspec'
 end
 
